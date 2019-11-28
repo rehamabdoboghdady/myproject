@@ -1,0 +1,165 @@
+<html>
+<head></head>
+<body>
+<h1>Learn The English Letters</h1>
+Numbers of Letters: <input type="number",min="0" ,max="26" , id="text" >
+<input type="button" , id="button" , value="Generate">
+
+<div id="123">
+
+</div>
+
+<script>
+
+    var letters=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R',
+    'S','T','U','V','W','X','Y','Z'];
+ 
+var images1=["A.gif ","B.jpg ","C.gif ","D.jpg ","E.gif ","F.gif ",
+"G.gif ","H.gif ","I.gif ","J.gif ","K.gif ","L.gif ",
+"M.gif ","N.jpg ","O.jpg ","P.jpg ","Q.gif ","R.gif ","S.gif ",
+"T.gif ","U.jpg ","V.jpg ","W.jpg ","X.gif ","Y.jpg ","Z.jpg "];
+var x1=document.getElementById("text");
+var x2=document.getElementById("button");
+x2.addEventListener("click",function(){
+  //////////////////
+ 
+  clickCounter1();
+ localStorage.setItem('noc',localStorage.clickcount );
+  localStorage.setItem('nol',x1.value);
+  localStorage.setItem('time',new Date);
+  var obj={
+  numberOfClick:localStorage.getItem('noc'),
+    numberOfLetters:localStorage.getItem('nol'),
+    time:localStorage.getItem('time')
+  
+};
+localStorage.setItem('sobj1',JSON.stringify(obj));
+  //////////////////////
+  rand(x1.value);});
+
+function getrandomnumber(min, max) {
+        var w = Math.floor(Math.random() * (max - min + 1) + min);
+        return w;
+}
+var arr1=[];
+var btn;
+function rand(z){ 
+  var div=document.createElement("div");
+  div.setAttribute("class","dv");
+for(var i=0;i<z;i++){
+    
+    var r=getrandomnumber(0,letters.length-1);
+
+ btn=document.createElement("input");
+btn.setAttribute("type","button");
+btn.setAttribute("class","bttns");
+btn.setAttribute("value",letters[r]);
+btn.setAttribute("key",letters[r]);
+div.appendChild(btn);
+document.body.appendChild(btn);
+document.body.innerHTML+="  ";
+
+
+var listItems=document.getElementsByClassName("bttns");
+for(var j=0;j<listItems.length;j++){
+ 
+  
+ listItems[j].addEventListener("click",function(e){
+   
+   clickCounter1();
+   
+  localStorage.setItem('nol',e.target.value);
+  localStorage.setItem('time',new Date);
+var obj={
+    LetterClick:localStorage.getItem('nol'),
+    time:localStorage.getItem('time')
+  
+};
+
+ localStorage.setItem('sobj2',JSON.stringify(obj));
+   var xx=document.getElementsByClassName("mg");
+   if(xx.length>0){
+     var c=xx[0];
+     c.parentNode.removeChild(c);
+   }
+ var btnval=e.target.value;
+ var indexOfButton;
+ for(var i=0;i<letters.length;i++){
+   
+if(letters[i]==btnval){
+ indexOfButton=i;
+}
+ }
+var imag=document.createElement("img");
+imag.setAttribute("src",images1[indexOfButton]);
+imag.setAttribute("class","mg");
+imag.setAttribute("width","600px");
+imag.setAttribute("height","500px");
+document.body.appendChild(imag);
+ });
+ }
+}
+document.body.appendChild(div);
+}
+var ar=[];
+window.addEventListener("load",function(){
+
+  //////////////////
+  var load= localStorage.getItem('on_load_counter');
+ 
+ if (load=== null) {
+     load= 0;
+ }
+  
+ load++;
+  
+ localStorage.setItem("on_load_counter", load);
+
+  ///////////////
+
+  localStorage.setItem('time',new Date);
+var obj={
+  numberOfLoad:localStorage.getItem("on_load_counter"),
+    time:localStorage.getItem('time')
+  
+};
+
+ localStorage.setItem('sobj3',JSON.stringify(obj));
+  //////
+});
+window.addEventListener("unload",function(){
+  localStorage.setItem('time',new Date);
+var obj={
+    time:localStorage.getItem('time')
+};
+ localStorage.setItem('sobj4',JSON.stringify(obj));
+});
+
+ setTimeout(function()
+ {
+   localStorage.clear();
+ },5000);
+
+
+   
+    function clickCounter1() {
+  if(typeof(Storage) !== "undefined") {
+    if (localStorage.clickcount) {
+      localStorage.clickcount = Number(localStorage.clickcount)+1;
+    } else {
+      localStorage.clickcount = 1;
+    
+    }
+
+  }
+  }
+  var obj={
+  numberOfClick:localStorage.getItem('generatebtn'),
+    numberOfLetters:localStorage.getItem('inputnum'),
+    time:localStorage.getItem('time')
+  
+};
+
+</script>
+</body>
+</html>
