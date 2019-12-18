@@ -1,0 +1,160 @@
+<html>
+<head></head>
+<body>
+<h1>Learn The English Letters</h1>
+Numbers of Letters: <input type="number",min="0" ,max="26" , id="text" >
+<input type="button" , id="button" , value="Generate">
+<input type="button"  , id="show"  , value="Show All Events">
+<div id="123">
+
+</div>
+
+<script>
+
+    var letters=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R',
+    'S','T','U','V','W','X','Y','Z'];
+ 
+var images1=["A.gif ","B.jpg ","C.gif ","D.jpg ","E.gif ","F.gif ",
+"G.gif ","H.gif ","I.gif ","J.gif ","K.gif ","L.gif ",
+"M.gif ","N.jpg ","O.jpg ","P.jpg ","Q.gif ","R.gif ","S.gif ",
+"T.gif ","U.jpg ","V.jpg ","W.jpg ","X.gif ","Y.jpg ","Z.jpg "];
+var x1=document.getElementById("text");
+var x2=document.getElementById("button");
+var x3=document.getElementById("123");
+x2.addEventListener("click",function(e){
+
+  rand(x1.value);
+ //store event click generate button in localStorage
+  var btn_generate=[];
+
+    var click =new storeInLocalStorage(e.target.value,e.date=new Date,e.type);
+    if(localStorage.getItem("generate")==null)
+    {
+        btn_generate.push(click);
+		//convert object to string
+    localStorage.setItem("generate",JSON.stringify(btn_generate));
+    }
+    else
+    {
+	//convert string to object
+        btn_generate=JSON.parse(localStorage.getItem("generate"));
+        btn_generate.push(click);
+        localStorage.setItem("generate",JSON.stringify(btn_generate));
+    }
+});
+ 
+
+function getrandomnumber(min, max) {
+        var w = Math.floor(Math.random() * (max - min + 1) + min);
+        return w;
+}
+var arr1=[];
+var btn;
+function rand(z){ 
+  var div=document.createElement("div");
+  div.setAttribute("class","dv");
+for(var i=0;i<z;i++){
+    
+    var r=getrandomnumber(0,letters.length-1);
+
+ btn=document.createElement("input");
+btn.setAttribute("type","button");
+btn.setAttribute("class","bttns");
+btn.setAttribute("value",letters[r]);
+btn.setAttribute("key",letters[r]);
+div.appendChild(btn);
+document.body.appendChild(btn);
+document.body.innerHTML+="  ";
+
+
+var listItems=document.getElementsByClassName("bttns");
+for(var j=0;j<listItems.length;j++){
+ 
+  
+ listItems[j].addEventListener("click",function(e){
+   
+
+   var xx=document.getElementsByClassName("mg");
+   if(xx.length>0){
+     var c=xx[0];
+     c.parentNode.removeChild(c);
+   }
+ var btnval=e.target.value;
+ var indexOfButton;
+ for(var i=0;i<letters.length;i++){
+   
+if(letters[i]==btnval){
+ indexOfButton=i;
+}
+ }
+var imag=document.createElement("img");
+imag.setAttribute("src",images1[indexOfButton]);
+imag.setAttribute("class","mg");
+imag.setAttribute("width","600px");
+imag.setAttribute("height","500px");
+document.body.appendChild(imag);
+//store event click letter button in localStorage
+var btn_letter=[];
+    var click =new storeInLocalStorage(e.target.value,e.date=new Date,e.type);
+    if(localStorage.getItem("clickbtn")==null)
+    {
+        btn_letter.push(click);
+    localStorage.setItem("clickbtn",JSON.stringify(btn_letter));
+    }
+    else
+    {
+        btn_letter=JSON.parse(localStorage.getItem("clickbtn"));
+        btn_letter.push(click);
+        localStorage.setItem("clickbtn",JSON.stringify(btn_letter));
+    }
+ });
+ }
+}
+document.body.appendChild(div);
+}
+//function template to store the events in localStorage
+function storeInLocalStorage(target,date,type){
+			this.target=target;
+			this.date=date;
+			this.type=type;
+}
+//store event load  in localStorage
+ $arr_load=[];
+window.addEventListener("load",function(e){
+    var load =new storeInLocalStorage(e.target="load",e.date=new Date,e.type);
+    if(localStorage.getItem("load")==null)
+    {
+        $arr_load.push(load);
+    localStorage.setItem("load",JSON.stringify($arr_load));
+    }
+    else
+    {
+        $arr_load=JSON.parse(localStorage.getItem("load"));
+        $arr_load.push(load);
+        localStorage.setItem("load",JSON.stringify($arr_load));
+    }
+});
+//store event unload in localStorage
+var arr_unload=[];
+window.addEventListener("unload",function(e){
+    var unload =new storeInLocalStorage(e.target="unload",e.date=new Date,e.type);
+    if(localStorage.getItem("unload")==null)
+    {
+        arr_unload.push(unload);
+    localStorage.setItem("unload",JSON.stringify(arr_unload));
+    }
+    else
+    {
+        arr_unload=JSON.parse(localStorage.getItem("unload"));
+        arr_unload.push(unload);
+        localStorage.setItem("unload",JSON.stringify(arr_unload));
+    }
+});
+
+</script>
+<script src="jquery-3.4.1.min.js"></script>
+<script src="p22.js"></script>
+</body>
+
+
+</html>
